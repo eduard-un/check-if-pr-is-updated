@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PR Update Checker</title>
+  <style>
+    body {
+      width: 300px;
+      padding: 10px;
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 14px;
+      line-height: 1.4;
+    }
+    .status {
+      margin-top: 10px;
+      padding: 8px;
+      border-radius: 4px;
+      background-color: #f6f8fa;
+    }
+  </style>
+</head>
+<body>
+  <h1>PR Update Checker</h1>
+  <p>This extension checks if a GitHub PR is behind the main branch and displays a warning.</p>
+  <div class="status">
+    Status: <span id="status">Extension active</span>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
