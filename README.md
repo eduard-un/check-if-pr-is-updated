@@ -21,9 +21,9 @@ The extension uses selectors to find elements on GitHub pages. The current selec
 - `UPDATE_BUTTON`: Selector for the button that appears when a PR needs to be updated
 - `PR_TITLE`: Selector for the PR title element
 
-Open the Extention's Option page and set the correcet selectors for the PR titles and the Update button. Currently (04 April 2025) the selectors are:
-- Selector for the PR's title: `h1.gh-header-title`
-- Selector for the Update button: `.prc-Button-ButtonBase-c50BI`
+Open the Extention's Option page and set the correcet selectors for the **PR's title** and the **Update button**. Currently (04 April 2025) the selectors are:
+- Selector for the **PR's title**: `h1.gh-header-title`
+- Selector for the **Update button**: `.prc-Button-ButtonBase-c50BI`
 
 ## Features
 
