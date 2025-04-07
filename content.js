@@ -21,8 +21,34 @@ function loadSelectors() {
 
 // Function to check if the PR is behind the main branch
 function isPrBehindMain() {
-  const updateButton = document.querySelector(SELECTORS.UPDATE_BUTTON);
-  return updateButton !== null;
+  // First try with the selector from options
+  const updateButtons = document.querySelectorAll(SELECTORS.UPDATE_BUTTON);
+  
+  // Check each button that matches the selector
+  for (const button of updateButtons) {
+    // Check if the button or any of its children contains 'Update branch' text
+    if (button.textContent.includes('Update branch')) {
+      return true;
+    }
+    
+    // Also check for any span elements inside the button that might contain the text
+    const spans = button.querySelectorAll('span');
+    for (const span of spans) {
+      if (span.textContent.includes('Update branch')) {
+        return true;
+      }
+    }
+  }
+  
+  // As a fallback, try to find any button on the page with 'Update branch' text
+  const allButtons = document.querySelectorAll('button');
+  for (const button of allButtons) {
+    if (button.textContent.includes('Update branch')) {
+      return true;
+    }
+  }
+  
+  return false;
 }
 
 // Function to add a warning after the PR title
@@ -31,10 +57,15 @@ function addWarningAfterTitle() {
   
   if (prTitle) {
     // Check if warning already exists to avoid duplicates
-    if (!document.getElementById('pr-update-warning')) {
+    const existingWarning = document.getElementById('pr-update-warning');
+    
+    if (!existingWarning) {
       const warningElement = document.createElement('span');
       warningElement.id = 'pr-update-warning';
       warningElement.textContent = '⚠️ This PR is behind the main branch and needs to be updated!';
+      warningElement.style.color = 'red';
+      warningElement.style.fontWeight = 'bold';
+      warningElement.style.marginLeft = '10px';
       
       prTitle.insertAdjacentElement('afterend', warningElement);
     }
@@ -51,7 +82,9 @@ function removeWarning() {
 
 // Main function to check PR status and update UI
 function checkPrStatus() {
-  if (isPrBehindMain()) {
+  const needsUpdate = isPrBehindMain();
+  
+  if (needsUpdate) {
     addWarningAfterTitle();
     addUpdateButtonListener(); // Add listener when we detect the update button
   } else {
